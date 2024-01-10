@@ -1,0 +1,29 @@
+{
+	"format_version": "1.20.51",
+	"animation_controllers": {
+		"controller.animation.dragon.sitting":{
+    "states":{
+        "default":{
+            "transitions":[
+                {
+                    "sitting":"query.variant == 1"
+                }
+            ]
+        },
+        "sitting":{
+            "transitions":[
+                {
+                    "default":"query.variant == 0"
+                }
+            ],
+            "on_entry":[
+                "/effect @s slowness 20000 100 true"
+            ],
+            "on_exit":[
+                "/effect @s slowness 0 101 true"
+            ]
+        }
+    }
+}
+}
+}

@@ -1,0 +1,188 @@
+{
+	"format_version": "1.20.51",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "pern:dragon_egg",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"component_groups": {
+			"incubation": {
+				"minecraft:variant": {
+					"value": 1
+				},
+				"minecraft:timer": {
+					"looping": false,
+					"randomInterval": true,
+					"time": [
+						15,
+						15
+					],
+					"time_down_event": {
+						"event": "hatching"
+					}
+				}
+			},
+			"hatching": {
+				"minecraft:variant": {
+					"value": 2
+				},
+				"minecraft:timer": {
+					"looping": false,
+					"randomInterval": true,
+					"time": [
+						10,
+						10
+					],
+					"time_down_event": {
+						"event": "hatch"
+					}
+				}
+			},
+			"hatch": {
+				"minecraft:variant": {
+					"value": 3
+				},
+				"minecraft:timer": {
+					"looping": false,
+					"randomInterval": true,
+					"time": [
+						3,
+						3
+					],
+					"time_down_event": {
+						"event": "transform"
+					}
+				}
+			},
+			"transform": {
+				"minecraft:transformation":
+				{
+					"into": "pern:dragon"
+				}
+			},
+			"stasis": {
+				"minecraft:variant": {
+					"value": 0
+				}
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": [
+					"pern",
+					"DragonEgg",
+					"Std"
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 0.63,
+				"height": 0.88
+			},
+			"minecraft:loot": {
+				"table": "loot_tables/entities/DragonEgg.json"
+			},
+			"minecraft:health": {
+				"value": 10,
+				"max": 10
+			},
+			"minecraft:knockback_resistance": {
+				"value": 0.5
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 10
+					}
+				]
+			},
+			"minecraft:damage_sensor": {
+				"triggers": {
+					"cause": "fall",
+					"deals_damage": false
+				}
+			},
+			"minecraft:on_hurt_by_player": {
+				"event": "addinc",
+				"target": "self"
+			},
+			"minecraft:vibration_damper": {},
+			"minecraft:balloonable": {
+				"mass": 1.0
+			},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {}
+		},
+		"events": {
+			"minecraft:entity_born": {
+				"add": {
+					"component_groups": [
+						"stasis"
+					]
+				}
+			},
+			"minecraft:entity_spawned": {
+				"add": {
+					"component_groups": [
+						"incubation"
+					]
+				}
+			},
+			"maddinc": {
+				"add": {
+					"component_groups": [
+						"incubation"
+					]
+				}
+			},
+			"hatching": {
+				"remove": {
+					"component_groups": [
+						"incubation"
+					]
+				},
+				"add": {
+					"component_groups": [
+						"hatching"
+					]
+				}
+			},
+			"hatch": {
+				"remove": {
+					"component_groups": [
+						"hatching"
+					]
+				},
+				"add": {
+					"component_groups": [
+						"hatch"
+					]
+				}
+			},
+			"transform": {
+				"remove": {
+					"component_groups": [
+						"hatch"
+					]
+				},
+				"add": {
+					"component_groups": [
+						"transform"
+					]
+				}
+			}
+		}
+	}
+}

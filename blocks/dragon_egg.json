@@ -1,0 +1,69 @@
+{
+	"format_version": "1.20.51",
+	"minecraft:block": {
+		"description": {
+			"identifier": "pern:dragon_egg",
+			"menu_catagory": {
+				"category": "nature"
+			}
+		},
+		"components": {
+			"minecraft:display_name": "Dragon Egg Block",
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+			"minecraft:selection_box": {
+				"origin": [
+					-8,
+					0,
+					-8
+				],
+				"size": [
+					16,
+					16,
+					16
+				]
+			},
+			"minecraft:collision_box": {
+				"origin": [
+					-8,
+					0,
+					-8
+				],
+				"size": [
+					16,
+					16,
+					16
+				]
+			},
+			"minecraft:friction": 0.6,
+			"minecraft:geometry": "geometry.dragon_egg",
+			"minecraft:map_color": "#05C3D2",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dragon_block_texture",
+					"ambient_occlusion": false,
+					"face_dimming": false,
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:on_interact": {
+				"target": "self",
+				"event" : "startincubation"
+
+			}
+		},
+		"events": {
+			"startincubation": {
+				"run_command": {
+					"command": [
+						"setblock ~ ~ ~ air",
+						"summon pern:dragon_egg ~ ~0.01 ~",
+						"particle pern:dragon_egg_activate"
+					]
+				}
+			}
+		}
+	}
+}

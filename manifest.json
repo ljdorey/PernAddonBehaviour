@@ -1,0 +1,29 @@
+{
+    "format_version": 2,
+    "header": {
+        "description": "Pern Dragons Behaviour Pack",
+        "name": "Pern Behavior Pack",
+        "uuid": "29279f5f-9acd-4774-bea7-89ed42781337",
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 20, 40]
+    },
+    "modules": [
+        {
+            "description": "Pern Dragons behavior pack module",
+            "type": "data",
+            "uuid": "dcd87b01-807b-47c1-9dc4-aa7a90d367fe",
+            "version": [1, 0, 0]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "ec6bff35-8b26-47f2-a5f1-a23d185a1fff",
+            "version": [1, 0, 0]
+        }
+    ],
+    "metadata": {
+        "authors": ["Alexandra Dorey"],
+        "license": "MIT",
+        "url": "TODO: Github"
+    }
+}
