@@ -141,10 +141,10 @@
             "minecraft:is_baby": {},
             "minecraft:scale_by_age": {
                "start_scale": 0.5,
-               "end_scale": 1.00
+               "end_scale": 1.50
             },
             "minecraft:ageable": {
-               "duration": 180,
+               "duration": 60,
                "feed_items": [
                   {
                      "item": "cod",
@@ -183,7 +183,7 @@
          },
          "dragon_adult": {
             "minecraft:scale": {
-               "value": 1
+               "value": 1.50
             },
             "minecraft:type_family": {
                "family": [
@@ -218,7 +218,8 @@
                "probability": 0.12,
                "tame_items": [
                   "fish",
-                  "salmon"
+                  "salmon",
+                  "rabbit"
                ],
                "tame_event": {
                   "event": "on_tame",
@@ -248,17 +249,17 @@
                "container_type": "horse"
             },
             "minecraft:behavior.owner_hurt_by_target": {
-					"priority": 0
-				},
-				"minecraft:behavior.owner_hurt_target": {
-					"priority": 1
-				},
-				"minecraft:behavior.follow_owner": {
-					"priority": 0,
-					"speed_multiplier": 2.0,
-					"start_distance": 12,
-					"stop_distance": 4
-				}
+               "priority": 0
+            },
+            "minecraft:behavior.owner_hurt_target": {
+               "priority": 1
+            },
+            "minecraft:behavior.follow_owner": {
+               "priority": 0,
+               "speed_multiplier": 2.0,
+               "start_distance": 12,
+               "stop_distance": 4
+            }
          },
          "dragon_saddled": {
             "minecraft:is_saddled": {},
@@ -271,6 +272,21 @@
          }
       },
       "components": {
+         "minecraft:environment_sensor": {
+            "triggers": [
+               {
+                  "filters": {
+                     "all_of": [
+                        {
+                           "test": "is_underwater",
+                           "value": true
+                        }
+                     ]
+                  },
+                  "event": "underwater_notification"
+               }
+            ]
+         },
          "minecraft:behavior.tempt": {
             "priority": 2,
             "can_tempt_vertically": true,
@@ -296,10 +312,10 @@
                      "saddle"
                   ],
                   "on_equip": {
-                     "event": "dragon_saddled"
+                     "event": "underwater_notification"
                   },
                   "on_unequip": {
-                     "event": "dragon_unsaddled"
+                     "event": "underwater_notification"
                   }
                },
                {
@@ -351,31 +367,33 @@
          },
          "minecraft:navigation.generic": {
             "avoid_water": false,
+            "is_amphibious": false,
+            "can_path_over_water": false, 
             "can_swim": true,
             "can_sink": true,
             "can_path_from_air": true,
             "can_walk": true
          },
          "minecraft:movement.generic": {},
-         "minecraft:jump.static":{
+         "minecraft:jump.static": {
             "jump_power": 10.0
          },
          "minecraft:movement": {
-            "value": 1.0
+            "value": 0.2
          },
          "minecraft:shooter":{
             "aux_val": -1,
             "def": "minecraft:small_fireball"
         },
          "minecraft:underwater_movement": {
-            "value": 1.0
+            "value": 0.2
          },
          "minecraft:flying_speed":{
-            "value": 2.0
+            "value": 3.0
          },
-         "minecraft:can_fly":{},
+         "minecraft:can_fly": {},
          "minecraft:water_movement": {
-            "drag_factor": 1.0
+            "drag_factor": 0.2
          },
          "minecraft:nameable": {},
          "minecraft:horse.jump_strength": {
@@ -418,8 +436,7 @@
                }
             ]
          },
-         "minecraft:can_climb":{
-         },
+         "minecraft:can_climb": {},
          "minecraft:behavior.look_at_player": {
             "priority": 7,
             "look_distance": 6.0,
@@ -436,6 +453,13 @@
          "minecraft:conditional_bandwidth_optimization": {}
       },
       "events": {
+         "underwater_notification": {
+            "run_command": {
+               "command": [
+                  "say unda da sea"
+               ]
+            }
+         },
          "minecraft:entity_spawned": {
             "sequence": [
                {
