@@ -206,7 +206,7 @@
                "priority": 3
             },
             "minecraft:behavior.run_around_like_crazy": {
-               "priority": 1,
+               "priority": 2  ,
                "speed_multiplier": 1.2
             }
          },
@@ -363,6 +363,10 @@
          "minecraft:movement": {
             "value": 1.0
          },
+         "minecraft:shooter":{
+            "aux_val": -1,
+            "def": "minecraft:small_fireball"
+        },
          "minecraft:underwater_movement": {
             "value": 1.0
          },
@@ -529,7 +533,9 @@
                "component_groups": [
                   "dragon_saddled"
                ]
+               
             }
+         
          },
          "dragon_unsaddled": {
             "remove": {
